@@ -1,0 +1,8 @@
+# ignore everything
+*
+
+# include git files
+!.gitignore
+
+# include documentation
+!README.md
