@@ -4,5 +4,8 @@
 # include git files
 !.gitignore
 
+# include github files
+!./.github/**/*
+
 # include documentation
 !README.md
