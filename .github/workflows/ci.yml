@@ -1,7 +1,7 @@
 name: Build Hello World
 on: push
 jobs:
-  setup:
+  build-java-app-natively-on-windows-with-graalvm:
     runs-on: windows-2019
 
     env:
@@ -10,10 +10,10 @@ jobs:
       VISUAL_STUDIO_BUILD_TOOLS_TOME: C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64
 
     steps:
-    - name: checkout
+    - name: Checkout Source
       uses: actions/checkout@v2
 
-    - name: check-project-state
+    - name: Check Project State
       run: ls
 
     - name: Cache Chocolatey Dependencies
@@ -29,45 +29,45 @@ jobs:
       with:
         args: install dependencies.config -y
 
-    - name: pathed-compiler
+    - name: Put Compiler onto Path
       run: echo "::add-path::C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64"
 
-    - name: check-compiler-state
+    - name: Check Compiler State
       run: |
         ls "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64"
         (Get-Item -Path Env:Path).Value.Split(";")
         cl.exe
 
-    - name: setup-graalvm
+    - name: Setup GraalVM
       run: echo "::add-path::C:\Program Files\GraalVM\graalvm-ce-java11-20.0.0\bin"
 
-    - name: check-graalvm-state
+    - name: Check GraalVM State
       run: java -version
 
-    - name: setup-native-image
+    - name: Setup Native-Image
       shell: cmd
       run: |
         gu install native-image
         native-image.cmd
 
-    - name: compile-java
+    - name: Compile Application to Java ByteCode
       run: |
         javac A.java
         ls
 
     # we need to set the vc environment before calling native-image because the environment is lost between steps
-    - name: compile-native
+    - name: Compile Application to Native
       shell: cmd
       run: |
         call "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvars64.bat"  
         native-image.cmd -H:+ReportExceptionStackTraces A
         ls
 
-    - name: execute-build
+    - name: Execute Application
       shell: cmd
       run: A.exe
 
-    - name: upload-artifact
+    - name: Upload Application as Artifacft
       uses: actions/upload-artifact@v1
       with:
         name: hello-world
