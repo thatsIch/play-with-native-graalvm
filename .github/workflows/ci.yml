@@ -12,6 +12,9 @@ jobs:
     - name: checkout
       uses: actions/checkout@v2
 
+    - name: check-project-state
+      run: ls
+
     - name: install-compiler
       uses: crazy-max/ghaction-chocolatey@v1
       with:
@@ -39,7 +42,5 @@ jobs:
       shell: cmd
       run: gu install native-image
 
-    - name: asd
-      run: ls
-#    - name: compile-java
-#      run: javac A.java
+    - name: compile-java
+      run: javac A.java
