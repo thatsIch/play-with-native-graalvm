@@ -6,8 +6,7 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v2
-    - name: install-chocolatey
+    - name: install-compiler
       uses: crazy-max/ghaction-chocolatey@v1
       with:
-        args: -h
-  
+        args: install visualstudio2019buildtools -y
