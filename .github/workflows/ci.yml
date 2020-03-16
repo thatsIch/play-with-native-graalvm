@@ -27,7 +27,7 @@ jobs:
     - name: Install Dependencies
       uses: crazy-max/ghaction-chocolatey@v1
       with:
-        args: install dependencies.config -y
+        args: install dependencies.config -y --force
 
     - name: Put Compiler onto Path
       run: echo "::add-path::C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64"
