@@ -19,13 +19,10 @@ jobs:
     - name: Cache Chocolatey Dependencies
       uses: actions/cache@v1
       with:
-        path: ~\Appdata\Local\Temp\chocolatey
-        key: ${{ runner.OS }}-choco-cache-${{ hashFiles('**/dependencies.config') }}
+        path: C:\ProgramData\chocolatey\lib
+        key: choco-cache-${{ hashFiles('**/dependencies.config') }}
         restore-keys: |
-          ${{ runner.OS }}-choco-cache-
-
-    - name: Check where Chocolatey is storing stuff
-      run: ls "C:\ProgramData\chocolatey\lib"
+          choco-cache-
 
     - name: Install Dependencies
       uses: crazy-max/ghaction-chocolatey@v1
