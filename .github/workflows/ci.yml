@@ -26,10 +26,6 @@ jobs:
       with:
         args: install windows-sdk-10.1 -y --version 10.1.18362.1
 
-    - name: setup-compiler-environment
-      shell: cmd
-      run: call "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
-
     - name: pathed-compiler
       run: echo "::add-path::C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64"
 
