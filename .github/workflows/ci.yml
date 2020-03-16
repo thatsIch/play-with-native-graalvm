@@ -11,6 +11,7 @@ jobs:
       with:
         args: install visualstudio2019buildtools -y --version 16.4.6.0
     - name: setup-compiler-environment
+      shell: cmd
       run: call "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
     - name: install-graalvm
       uses: crazy-max/ghaction-chocolatey@v1
@@ -19,4 +20,5 @@ jobs:
     - name: smoke-test-graalvm
       run: java --version
     - name: setup-native-image
+      shell: cmd
       run: gu install native-image
