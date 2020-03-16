@@ -14,3 +14,5 @@ jobs:
       uses: crazy-max/ghaction-chocolatey@v1
       with:
         args: install graalvm -y --version 20.0.0
+    - name: setup-native-image
+      run: gu install native-image
