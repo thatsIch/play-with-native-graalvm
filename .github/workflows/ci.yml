@@ -26,7 +26,10 @@ jobs:
 
     - name: pathed-compiler
       shell: cmd
-      run: echo "::add-path::C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64
+      run: echo "::add-path::C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64"
+
+    - name: smoke-test-compiler
+      run: cl.exe
 
     - name: install-graalvm
       uses: crazy-max/ghaction-chocolatey@v1
