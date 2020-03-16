@@ -9,4 +9,8 @@ jobs:
     - name: install-compiler
       uses: crazy-max/ghaction-chocolatey@v1
       with:
-        args: install visualstudio2019buildtools -y
+        args: install visualstudio2019buildtools -y --version 16.4.6.0
+    - name: install-graalvm
+      uses: crazy-max/ghaction-chocolatey@v1
+      with:
+        args: install graalvm -y --version 20.0.0
