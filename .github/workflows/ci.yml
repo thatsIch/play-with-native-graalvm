@@ -39,5 +39,7 @@ jobs:
       shell: cmd
       run: gu install native-image
 
-    - name: compile-java
-      run: javac A.java
+    - name: asd
+      run: ls
+#    - name: compile-java
+#      run: javac A.java
