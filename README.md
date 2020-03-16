@@ -6,6 +6,25 @@ This is a test application to compile a java application on graalvm for windows 
 
 There is a significant amount of setup which needs to be done that an application can be compiled natively on windows.
 
+### Automated TL;DR
+
+    choco install dependencies.config -y
+    set PATH=C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64;%PATH%
+    set GRAALVM_HOME=C:\Program Files\GraalVM\graalvm-ce-java11-20.0.0
+    set JAVA_HOME=%GRAALVM_HOME%
+    set PATH=%GRAALVM_HOME%\bin;%PATH%
+    gu install native-image
+    C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvars64.bat
+
+### Automated
+
+Chocolatey is a package manager for windows which allows automatic installation of common applications hosted by https://chocolatey.org/.
+
+It supports either packages or package configurations. Package configurations contain the package name and version which could be entered manually. For reference look at [dependencies.config](dependencies.config) used in this project.
+
+    choco install dependencies.config -y
+
+
 ### GraalVM
 
 Community Edition builds are distributed on [Github](https://github.com/graalvm/graalvm-ce-builds/releases). This guide was using version 20.0.0 at the time. You can download it from this [link](https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.0.0/graalvm-ce-java11-windows-amd64-20.0.0.zip) for Java 11 support.
@@ -49,15 +68,15 @@ After installation you should be able to choose the directory and prime the envi
 
 ### Java
 
-Create a new Java class called `A` in a file `A.java` like
+Create a new Java class called `Main` in a file `Main.java` like
 
-    > echo public class A {  public static void main(String[] args) { System.out.println("Hello  Graalvm!"); }} >> A.java
+    > echo public class Main {  public static void main(String[] args) { System.out.println("Hello  Graalvm!"); }} >> Main.java
 
 You can compile it with `javac`
 
-    > javac A.java
+    > javac Main.java
 
-which results in `A.class`.
+which results in `Main.class`.
 
 ### Native
 
@@ -83,9 +102,9 @@ With `native-image.bat` you can compile Java Byte Code to native code using the 
 
 ## Execution
 
-Running `native-image.bat A` generates a native executable on windows called `A.exe` which prints to console.
+Running `native-image.bat Main` generates a native executable on windows called `Main.exe` which prints to console.
 
-    > A.exe
+    > Main.exe
     Hello Graalvm!
 
 ## Speed Comparison
