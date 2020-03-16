@@ -7,6 +7,7 @@ jobs:
     env:
       GRAALVM_HOME: C:\Program Files\GraalVM\graalvm-ce-java11-20.0.0
       JAVA_HOME: C:\Program Files\GraalVM\graalvm-ce-java11-20.0.0
+      VISUAL_STUDIO_BUILD_TOOLS_TOME: C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64
 
     steps:
     - name: checkout
@@ -50,4 +51,6 @@ jobs:
 
     - name: compile-native
       shell: cmd
-      run: native-image.cmd -H:+ReportExceptionStackTraces A
+      run: |
+        set PATH=C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64;%PATH% &&
+        native-image.cmd -H:+ReportExceptionStackTraces A
