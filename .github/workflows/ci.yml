@@ -52,16 +52,22 @@ jobs:
 
     - name: setup-native-image
       shell: cmd
-      run: gu install native-image
+      run: |
+        gu install native-image
+        native-image.cmd
 
     - name: compile-java
-      run: javac A.java
+      run: |
+        javac A.java
+        ls
 
     - name: compile-native
       shell: cmd
       run: |
         call "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvars64.bat"  
         native-image.cmd -H:+ReportExceptionStackTraces A
+        ls
 
     - name: execute-build
+      shell: cmd
       run: A.exe
