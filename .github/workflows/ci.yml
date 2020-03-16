@@ -21,6 +21,11 @@ jobs:
       with:
         args: install visualstudio2017-workload-vctools -y --version 1.3.2
 
+    - name: install-sdk
+      uses: crazy-max/ghaction-chocolatey@v1
+      with:
+        args: install windows-sdk-10.1 -y --version 10.1.18362.1
+
     - name: setup-compiler-environment
       shell: cmd
       run: call "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
