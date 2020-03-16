@@ -12,6 +12,7 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v2
+      run: ls
 
     - name: check-project-state
       run: ls
