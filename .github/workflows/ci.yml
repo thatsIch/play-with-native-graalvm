@@ -3,6 +3,11 @@ on: push
 jobs:
   setup:
     runs-on: windows-2019
+
+    env:
+      GRAALVM_HOME: C:\Program Files\GraalVM\graalvm-ce-java11-20.0.0
+      JAVA_HOME: C:\Program Files\GraalVM\graalvm-ce-java11-20.0.0
+
     steps:
     - name: checkout
       uses: actions/checkout@v2
