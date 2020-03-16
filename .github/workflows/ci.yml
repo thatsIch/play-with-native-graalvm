@@ -32,6 +32,7 @@ jobs:
       run: |
         ls "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64"
         (Get-Item -Path Env:Path).Value.Split(";")
+        cl.exe
 
     - name: install-graalvm
       uses: crazy-max/ghaction-chocolatey@v1
@@ -39,9 +40,10 @@ jobs:
         args: install graalvm -y --version 20.0.0
 
     - name: setup-graalvm
-      run: |
-        echo "::add-path::C:\Program Files\GraalVM\graalvm-ce-java11-20.0.0\bin"
-        java -version
+      run: echo "::add-path::C:\Program Files\GraalVM\graalvm-ce-java11-20.0.0\bin"
+
+    - name: check-graalvm-state
+      run: java -version
 
     - name: setup-native-image
       shell: cmd
@@ -52,6 +54,7 @@ jobs:
 
     - name: compile-native
       shell: cmd
-      run: |
-        set PATH=C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64;%PATH%
-        native-image.cmd -H:+ReportExceptionStackTraces A
+      run: native-image.cmd -H:+ReportExceptionStackTraces A
+
+    - name: execute-build
+      run: A.exe
