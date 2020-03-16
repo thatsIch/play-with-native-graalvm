@@ -16,6 +16,14 @@ jobs:
     - name: check-project-state
       run: ls
 
+    - name: Cache Chocolatey Dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~\Appdata\Local\Temp\chocolatey
+        key: ${{ runner.OS }}-choco-cache-${{ hashFiles('**/dependencies.config') }}
+        restore-keys: |
+          ${{ runner.OS }}-choco-cache-
+
     - name: Install Dependencies
       uses: crazy-max/ghaction-chocolatey@v1
       with:
