@@ -24,6 +24,9 @@ jobs:
         restore-keys: |
           ${{ runner.OS }}-choco-cache-
 
+    - name: Check where Chocolatey is storing stuff
+      run: ls "C:\ProgramData\chocolatey\lib"
+
     - name: Install Dependencies
       uses: crazy-max/ghaction-chocolatey@v1
       with:
