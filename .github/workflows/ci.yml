@@ -13,6 +13,9 @@ jobs:
     - name: setup-compiler-environment
       shell: cmd
       run: call "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
+    - name: pathed-compiler
+      shell: cmd
+      run: echo "::add-path::C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64
     - name: install-graalvm
       uses: crazy-max/ghaction-chocolatey@v1
       with:
