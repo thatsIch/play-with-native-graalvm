@@ -61,6 +61,7 @@ jobs:
         javac A.java
         ls
 
+    # we need to set the vc environment before calling native-image because the environment is lost between steps
     - name: compile-native
       shell: cmd
       run: |
@@ -71,3 +72,9 @@ jobs:
     - name: execute-build
       shell: cmd
       run: A.exe
+
+    - name: upload-artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: hello-world
+        path: A.exe
