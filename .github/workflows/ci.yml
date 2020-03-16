@@ -44,3 +44,7 @@ jobs:
 
     - name: compile-java
       run: javac A.java
+
+    - name: compile-native
+      shell: cmd
+      run: native-image.cmd -H:+ReportExceptionStackTraces A
