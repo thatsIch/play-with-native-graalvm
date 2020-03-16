@@ -8,13 +8,13 @@ There is a significant amount of setup which needs to be done that an applicatio
 
 ### Automated TL;DR
 
-    choco install dependencies.config -y
-    set PATH=C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64;%PATH%
-    set GRAALVM_HOME=C:\Program Files\GraalVM\graalvm-ce-java11-20.0.0
-    set JAVA_HOME=%GRAALVM_HOME%
-    set PATH=%GRAALVM_HOME%\bin;%PATH%
-    gu install native-image
-    C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvars64.bat
+    > choco install dependencies.config -y
+    > set PATH=C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64;%PATH%
+    > set GRAALVM_HOME=C:\Program Files\GraalVM\graalvm-ce-java11-20.0.0
+    > set JAVA_HOME=%GRAALVM_HOME%
+    > set PATH=%GRAALVM_HOME%\bin;%PATH%
+    > gu install native-image
+    > C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvars64.bat
 
 ### Automated
 
@@ -22,10 +22,27 @@ Chocolatey is a package manager for windows which allows automatic installation 
 
 It supports either packages or package configurations. Package configurations contain the package name and version which could be entered manually. For reference look at [dependencies.config](dependencies.config) used in this project.
 
-    choco install dependencies.config -y
+    > choco install dependencies.config -y
 
+This installs the build tools and GraalVM onto your machine. Installation does not affect the environment variables, which are required for some tools. To set them up execute
 
-### GraalVM
+    > set GRAALVM_HOME=C:\Program Files\GraalVM\graalvm-ce-java11-20.0.0
+    > set JAVA_HOME=%GRAALVM_HOME%
+    > set PATH=%GRAALVM_HOME%\bin;%PATH%
+
+The Visual Studio Build Tools require specific environment variables to be set for the linked files like LIB, INCLUDE and [many more according to SO](https://stackoverflow.com/a/59679967/2787159). To set them you need to run
+
+    > C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvars64.bat
+
+GraalVM in its naked form does not ship with native image compilation and needs to be installed by the GraalVM Component Updater `gu`
+
+    > gu install native-image
+
+### Manual
+
+There are ways if you do not want to rely on not installed applications and do everything manually.
+
+#### GraalVM
 
 Community Edition builds are distributed on [Github](https://github.com/graalvm/graalvm-ce-builds/releases). This guide was using version 20.0.0 at the time. You can download it from this [link](https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.0.0/graalvm-ce-java11-windows-amd64-20.0.0.zip) for Java 11 support.
 
@@ -36,6 +53,7 @@ Extract the zip to any location to your liking like
 and export to `PATH`
 
     > set GRAALVM_HOME=C:\Program Files\Java\GraalVM\20\11
+    > set JAVA_HOME=%GRAALVM_HOME%
     > set PATH=%GRAALVM_HOME%\bin;%PATH%
 
 This will ensure, that GraalVM is being used and not some already installed JDK/JRE. Extracting the version should result version number 11.0.6.
@@ -43,25 +61,21 @@ This will ensure, that GraalVM is being used and not some already installed JDK/
     > javac -version
     javac 11.0.6
 
-### Native Image
+#### Native Image
 
-Native Image is not being shipped with GraalVM anymore but requires an installation via GraalVM Updater Tool. Since we chose the community edition we can install Native Image via
-
-    > gu install native-image
-
-alternatively you could download the Native Image jar and install via
+Native Image is not being shipped with GraalVM anymore but requires a post installation. You can download the Native Image jar from [Github Releases](https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.0.0/native-image-installable-svm-java11-windows-amd64-20.0.0.jar) and install via
 
     > gu -L install native-image-installable-svm-svmee-java11-windows-amd64-20.0.0.jar
 
 This will grant access to `native-image.cmd` which can compile Java Byte Code to native code.
 
-### Visual Studio 2019 Community Edition
+### Visual Studio 2017 Build Tools
 
-GraalVM requires a compiler for the plattform you want to run the application on. For Java 11 you require at least Visual Studio 2017 15.5.5 but it works with the latest [Visual Studio 2019 16.0.0](https://visualstudio.microsoft.com/downloads/#visual-studio-community-2019). There are probably ways to install less like the [Visual Studio 2019 Build Tool](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2019) which installs the necessary `cl.exe`.
+GraalVM requires a compiler for the plattform you want to run the application on. For Java 11 you require at least Visual Studio 2017. But since you do not require the whole Visual Studio Editor you can only install the the [Visual Studio 2017 Build Tool](https://my.visualstudio.com/Downloads?q=visual%20studio%202017&wt.mc_id=o~msft~vscom~older-downloads) which installs the necessary `cl.exe`.
 
 After installation you should be able to choose the directory and prime the environment.
 
-    > cd C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build
+    > cd C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build
     > vcvars64.bat
 
 ## Compilation
