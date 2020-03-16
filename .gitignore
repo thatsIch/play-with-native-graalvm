@@ -9,3 +9,6 @@
 
 # include documentation
 !README.md
+
+# include source files
+!A.java
