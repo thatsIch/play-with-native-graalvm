@@ -21,7 +21,7 @@ and export to `PATH`
 
 This will ensure, that GraalVM is being used and not some already installed JDK/JRE. Extracting the version should result version number 11.0.6.
 
-    > javac --veresion
+    > javac -version
     javac 11.0.6
 
 ### Native Image
