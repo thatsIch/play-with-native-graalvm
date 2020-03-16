@@ -59,7 +59,9 @@ jobs:
 
     - name: compile-native
       shell: cmd
-      run: native-image.cmd -H:+ReportExceptionStackTraces A
+      run: |
+        call "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvars64.bat"  
+        native-image.cmd -H:+ReportExceptionStackTraces A
 
     - name: execute-build
       run: A.exe
