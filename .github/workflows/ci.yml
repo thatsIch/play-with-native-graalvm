@@ -16,10 +16,10 @@ jobs:
     - name: check-project-state
       run: ls
 
-    - name: install-compiler
+    - name: Install Dependencies
       uses: crazy-max/ghaction-chocolatey@v1
       with:
-        args: install visualstudio2017-workload-vctools -y --version 1.3.2
+        args: install dependencies.config -y
 
     - name: pathed-compiler
       run: echo "::add-path::C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64"
@@ -29,11 +29,6 @@ jobs:
         ls "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64"
         (Get-Item -Path Env:Path).Value.Split(";")
         cl.exe
-
-    - name: install-graalvm
-      uses: crazy-max/ghaction-chocolatey@v1
-      with:
-        args: install graalvm -y --version 20.0.0
 
     - name: setup-graalvm
       run: echo "::add-path::C:\Program Files\GraalVM\graalvm-ce-java11-20.0.0\bin"

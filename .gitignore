@@ -4,6 +4,9 @@
 # include git files
 !.gitignore
 
+# include chocolatey files
+!dependencies.config
+
 # include github files
 !./.github/**/*
 
