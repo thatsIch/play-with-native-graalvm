@@ -87,3 +87,16 @@ Running `native-image.bat A` generates a native executable on windows called `A.
 
     > A.exe
     Hello Graalvm!
+
+## Speed Comparison
+
+With Powershell you can invoke
+
+* `Measure-Command { java Main.java }` for Java and
+* `Measure-Command { .\Main.exe }` for Native
+
+for timed execution. This is no benchmark but just to showcase the startup reduction potential.
+
+| Java | Native |
+| ---- | ------ |
+| 720ms | 30ms |
