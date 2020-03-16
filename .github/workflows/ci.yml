@@ -52,7 +52,7 @@ jobs:
 
     - name: Compile Application to Java ByteCode
       run: |
-        javac A.java
+        javac Main.java
         ls
 
     # we need to set the vc environment before calling native-image because the environment is lost between steps
@@ -60,15 +60,15 @@ jobs:
       shell: cmd
       run: |
         call "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvars64.bat"  
-        native-image.cmd -H:+ReportExceptionStackTraces A
+        native-image.cmd -H:+ReportExceptionStackTraces Main
         ls
 
     - name: Execute Application
       shell: cmd
-      run: A.exe
+      run: Main.exe
 
     - name: Upload Application as Artifacft
       uses: actions/upload-artifact@v1
       with:
         name: hello-world
-        path: A.exe
+        path: Main.exe
