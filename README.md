@@ -18,13 +18,13 @@ There is a significant amount of setup which needs to be done that an applicatio
 
 ### Automated
 
-Chocolatey is a package manager for windows which allows automatic installation of common applications hosted by https://chocolatey.org/.
+[Chocolatey](https://chocolatey.org/) is a package manager for Windows which allows automatic installation of common applications hosted by themself.
 
-It supports either packages or package configurations. Package configurations contain the package name and version which could be entered manually. For reference look at [dependencies.config](dependencies.config) used in this project.
+It supports either packages or package configurations. Package configurations contain the package name and version which could be entered manually. For reference look at the [dependencies.config](dependencies.config) used in this project. To install a package configuration run
 
     > choco install dependencies.config -y
 
-This installs the build tools and GraalVM onto your machine. Installation does not affect the environment variables, which are required for some tools. To set them up execute
+This installs the build tools and GraalVM onto your machine. Installation does not affect the environment variables, which are required for some tools. To set GraalVM up execute
 
     > set GRAALVM_HOME=C:\Program Files\GraalVM\graalvm-ce-java11-20.0.0
     > set JAVA_HOME=%GRAALVM_HOME%
@@ -40,11 +40,11 @@ GraalVM in its naked form does not ship with native image compilation and needs 
 
 ### Manual
 
-There are ways if you do not want to rely on not installed applications and do everything manually.
+There are ways if you do not want to rely on installing more applications than necessary and do everything manually.
 
 #### GraalVM
 
-Community Edition builds are distributed on [Github](https://github.com/graalvm/graalvm-ce-builds/releases). This guide was using version 20.0.0 at the time. You can download it from this [link](https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.0.0/graalvm-ce-java11-windows-amd64-20.0.0.zip) for Java 11 support.
+Community Edition builds are distributed on [Github](https://github.com/graalvm/graalvm-ce-builds/releases). You can download version 20.0.0 from this [link](https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.0.0/graalvm-ce-java11-windows-amd64-20.0.0.zip) for Java 11 support. 
 
 Extract the zip to any location to your liking like
 
@@ -56,7 +56,7 @@ and export to `PATH`
     > set JAVA_HOME=%GRAALVM_HOME%
     > set PATH=%GRAALVM_HOME%\bin;%PATH%
 
-This will ensure, that GraalVM is being used and not some already installed JDK/JRE. Extracting the version should result version number 11.0.6.
+This will ensure, that GraalVM is being used and not some already installed JDK/JRE. Extracting the version should result version number `11.0.6`.
 
     > javac -version
     javac 11.0.6
@@ -96,7 +96,7 @@ which results in `Main.class`.
 
 With `native-image.bat` you can compile Java Byte Code to native code using the native compilers for the plattform.
 
-    > native-image.cmd A
+    > native-image.cmd Main
     [a:3532]    classlist:   2,551.09 ms,  1.00 GB
     [a:3532]        (cap):   3,666.40 ms,  1.29 GB
     [a:3532]        setup:   7,093.33 ms,  1.29 GB
