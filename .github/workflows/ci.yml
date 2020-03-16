@@ -9,10 +9,10 @@ jobs:
     - name: install-compiler
       uses: crazy-max/ghaction-chocolatey@v1
       with:
-        args: install visualstudio2019buildtools -y --version 16.4.6.0
+        args: install visualstudio2017-workload-vctools -y --version 1.3.2
     - name: setup-compiler-environment
       shell: cmd
-      run: call "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
+      run: call "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
     - name: install-graalvm
       uses: crazy-max/ghaction-chocolatey@v1
       with:
