@@ -26,21 +26,20 @@ jobs:
       run: call "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvars64.bat"
 
     - name: pathed-compiler
-      shell: cmd
-      run: echo "::add-path::C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64"
-
-    - name: check-compiler-state
-      run: ls "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64"
+      run: |
+        echo "::add-path::C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64"
+        ls "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64"
+        (Get-Item -Path Env:Path).Value.Split(";")
 
     - name: install-graalvm
       uses: crazy-max/ghaction-chocolatey@v1
       with:
         args: install graalvm -y --version 20.0.0
-    - name: setup-graalvm
-      run: echo "::add-path::C:\Program Files\GraalVM\graalvm-ce-java11-20.0.0\bin"
 
-    - name: smoke-test-graalvm
-      run: java -version
+    - name: setup-graalvm
+      run: |
+        echo "::add-path::C:\Program Files\GraalVM\graalvm-ce-java11-20.0.0\bin"
+        java -version
 
     - name: setup-native-image
       shell: cmd
