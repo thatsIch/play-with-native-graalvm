@@ -5,8 +5,8 @@ jobs:
     runs-on: windows-2019
 
     env:
-      GRAALVM_HOME: C:\Program Files\GraalVM\graalvm-ce-java11-20.0.0
-      JAVA_HOME: C:\Program Files\GraalVM\graalvm-ce-java11-20.0.0
+      GRAALVM_HOME: C:\Program Files\GraalVM\graalvm-ce-java11-20.3.0
+      JAVA_HOME: C:\Program Files\GraalVM\graalvm-ce-java11-20.3.0
       VISUAL_STUDIO_BUILD_TOOLS_TOME: C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64
 
     steps:
@@ -31,7 +31,7 @@ jobs:
         cl.exe
 
     - name: Setup GraalVM
-      run: echo "::add-path::C:\Program Files\GraalVM\graalvm-ce-java11-20.0.0\bin"
+      run: echo "::add-path::C:\Program Files\GraalVM\graalvm-ce-java11-20.3.0\bin"
 
     - name: Check GraalVM State
       run: java -version
