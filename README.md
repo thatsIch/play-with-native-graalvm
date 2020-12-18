@@ -10,7 +10,7 @@ There is a significant amount of setup which needs to be done that an applicatio
 
     > choco install dependencies.config -y
     > set PATH=C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64;%PATH%
-    > set GRAALVM_HOME=C:\Program Files\GraalVM\graalvm-ce-java11-20.0.0
+    > set GRAALVM_HOME=C:\Program Files\GraalVM\graalvm-ce-java11-20.3.0
     > set JAVA_HOME=%GRAALVM_HOME%
     > set PATH=%GRAALVM_HOME%\bin;%PATH%
     > gu install native-image
@@ -26,7 +26,7 @@ It supports either packages or package configurations. Package configurations co
 
 This installs the build tools and GraalVM onto your machine. Installation does not affect the environment variables, which are required for some tools. To set GraalVM up execute
 
-    > set GRAALVM_HOME=C:\Program Files\GraalVM\graalvm-ce-java11-20.0.0
+    > set GRAALVM_HOME=C:\Program Files\GraalVM\graalvm-ce-java11-20.3.0
     > set JAVA_HOME=%GRAALVM_HOME%
     > set PATH=%GRAALVM_HOME%\bin;%PATH%
 
@@ -44,7 +44,7 @@ There are ways if you do not want to rely on installing more applications than n
 
 #### GraalVM
 
-Community Edition builds are distributed on [Github](https://github.com/graalvm/graalvm-ce-builds/releases). You can download version 20.0.0 from this [link](https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.0.0/graalvm-ce-java11-windows-amd64-20.0.0.zip) for Java 11 support. 
+Community Edition builds are distributed on [Github](https://github.com/graalvm/graalvm-ce-builds/releases). You can download version 20.3.0 from this [link](https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/graalvm-ce-java11-windows-amd64-20.3.0.zip) for Java 11 support. 
 
 Extract the zip to any location to your liking like
 
@@ -63,9 +63,9 @@ This will ensure, that GraalVM is being used and not some already installed JDK/
 
 #### Native Image
 
-Native Image is not being shipped with GraalVM anymore but requires a post installation. You can download the Native Image jar from [Github Releases](https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.0.0/native-image-installable-svm-java11-windows-amd64-20.0.0.jar) and install via
+Native Image is not being shipped with GraalVM anymore but requires a post installation. You can download the Native Image jar from [Github Releases](https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-20.3.0/native-image-installable-svm-java11-windows-amd64-20.3.0.jar) and install via
 
-    > gu -L install native-image-installable-svm-svmee-java11-windows-amd64-20.0.0.jar
+    > gu -L install native-image-installable-svm-svmee-java11-windows-amd64-20.3.0.jar
 
 This will grant access to `native-image.cmd` which can compile Java Byte Code to native code.
 
@@ -94,25 +94,25 @@ which results in `Main.class`.
 
 ### Native
 
-With `native-image.bat` you can compile Java Byte Code to native code using the native compilers for the plattform.
+With `native-image.cmd` you can compile Java Byte Code to native code using the native compilers for the plattform.
 
     > native-image.cmd Main
-    [a:3532]    classlist:   2,551.09 ms,  1.00 GB
-    [a:3532]        (cap):   3,666.40 ms,  1.29 GB
-    [a:3532]        setup:   7,093.33 ms,  1.29 GB
-    [a:3532]   (typeflow):  11,775.28 ms,  1.59 GB
-    [a:3532]    (objects):   6,350.12 ms,  1.59 GB
-    [a:3532]   (features):     407.08 ms,  1.59 GB
-    [a:3532]     analysis:  18,882.42 ms,  1.59 GB
-    [a:3532]     (clinit):     303.17 ms,  1.59 GB
-    [a:3532]     universe:     982.35 ms,  1.59 GB
-    [a:3532]      (parse):   3,217.60 ms,  1.59 GB
-    [a:3532]     (inline):   2,456.11 ms,  1.96 GB
-    [a:3532]    (compile):  15,663.34 ms,  1.96 GB
-    [a:3532]      compile:  22,033.20 ms,  1.96 GB
-    [a:3532]        image:   1,733.15 ms,  1.96 GB
-    [a:3532]        write:     542.60 ms,  1.96 GB
-    [a:3532]      [total]:  54,366.13 ms,  1.96 GB
+    [main:10724]    classlist:   1,099.78 ms,  0.96 GB
+    [main:10724]        (cap):   3,229.82 ms,  0.96 GB
+    [main:10724]        setup:   4,524.37 ms,  0.96 GB
+    [main:10724]     (clinit):     197.28 ms,  1.20 GB
+    [main:10724]   (typeflow):   4,476.40 ms,  1.20 GB
+    [main:10724]    (objects):   3,368.92 ms,  1.20 GB
+    [main:10724]   (features):     234.61 ms,  1.20 GB
+    [main:10724]     analysis:   8,442.70 ms,  1.20 GB
+    [main:10724]     universe:     396.98 ms,  1.22 GB
+    [main:10724]      (parse):   1,048.61 ms,  1.22 GB
+    [main:10724]     (inline):   1,035.53 ms,  1.66 GB
+    [main:10724]    (compile):   5,776.59 ms,  2.25 GB
+    [main:10724]      compile:   8,268.98 ms,  2.25 GB
+    [main:10724]        image:   1,029.04 ms,  2.25 GB
+    [main:10724]        write:     486.25 ms,  2.25 GB
+    [main:10724]      [total]:  24,409.37 ms,  2.25 GB
 
 ## Execution
 
@@ -132,4 +132,4 @@ for timed execution. This is no benchmark but just to showcase the startup reduc
 
 | Java | Native |
 | ---- | ------ |
-| 720ms | 30ms |
+| 1048ms | 21ms |
