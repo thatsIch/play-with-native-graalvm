@@ -22,7 +22,7 @@ jobs:
         args: install dependencies.config -y
 
     - name: Put Compiler onto Path
-      run: echo "::add-path::C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64"
+      run: echo "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
     - name: Check Compiler State
       run: |
@@ -31,7 +31,7 @@ jobs:
         cl.exe
 
     - name: Setup GraalVM
-      run: echo "::add-path::C:\Program Files\GraalVM\graalvm-ce-java11-20.3.0\bin"
+      run: echo "C:\Program Files\GraalVM\graalvm-ce-java11-20.3.0\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
     - name: Check GraalVM State
       run: java -version
